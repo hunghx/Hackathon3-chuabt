@@ -1,5 +1,7 @@
 package ra.model;
 
+import ra.validate.InputMethods;
+
 import java.util.Scanner;
 
 public class Singer {
@@ -71,11 +73,10 @@ public class Singer {
         this.gender = gender;
     }
 
-    public void inputData(Scanner sc){
-
+    public void inputData(){
         System.out.println("Nhập Tên");
         while (true) {
-            this.singerName = sc.nextLine();
+            this.singerName = InputMethods.getString();
             if (!singerName.trim().isBlank()){
                 break;
             }
@@ -83,18 +84,18 @@ public class Singer {
         }
         System.out.println("Nhập tuỏi");
         while (true) {
-            this.age = Integer.parseInt(sc.nextLine());
+            this.age =InputMethods.getInteger();
             if (age>0){
                 break;
             }
             System.err.println("tuoi phai lon hon 0");
         }
         System.out.println("Nhập quốc tích");
-        this.nationality = sc.nextLine();
+        this.nationality =InputMethods.getString();
         System.out.println("Nhập giơ tính");
-        this.gender = Boolean.parseBoolean(sc.nextLine());
+        this.gender = InputMethods.getBoolean();
         System.out.println("Nhập thê laoi");
-        this.genre = sc.nextLine();
+        this.genre =InputMethods.getString();
     }
     public void displayData(){
         System.out.println("----------------------------------------------------------------------------------------------------------");

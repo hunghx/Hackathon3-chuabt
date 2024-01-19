@@ -2,6 +2,7 @@ package ra.model;
 
 import ra.service.SingerService;
 import ra.service.SongService;
+import ra.validate.InputMethods;
 import ra.validate.Validate;
 
 import java.util.Date;
@@ -81,34 +82,32 @@ public class Song {
     public void setSongStatus(boolean songStatus) {
         this.songStatus = songStatus;
     }
-    public  void inputData(Scanner sc){
-        // kiem tra ca si
-        if (SingerService.singers.length==0){
-            System.err.println("Chưa có ca sĩ nào, vui lòng thêm ca sĩ trước");
-            return;
-        }
-        // nhập thông tin
-        System.out.println("Nhập song id");
-        while (true) {
-            this.songId = sc.nextLine();
-            if (!Validate.checkSongId(songId)){
-                if (SongService.findById(songId)==null){
-                    break;
+    public  void inputData(){
+        if (SongService.findById(this.songId)==null){
+            // nhập thông tin
+            System.out.println("Nhập song id");
+            while (true) {
+                this.songId = InputMethods.getString();
+                if (Validate.checkSongId(songId)){
+                    if (SongService.findById(songId)==null){
+                        break;
+                    }
+                    System.err.println("id đã tồn tại");
+                }else {
+                    System.err.println("Không đúng dịnh dạng");
                 }
-                System.err.println("id đã tồn tại");
-            }else {
-                System.err.println("Không đúng dịnh dạng");
-            }
 
+            }
         }
+
         System.out.println("Nhap ten bai hat");
-        this.songName = sc.nextLine();
+        this.songName = InputMethods.getString();
         System.out.println("Nhap mô ta");
-        this.descriptions = sc.nextLine();
+        this.descriptions = InputMethods.getString();
         System.out.println("Nhap tac gia");
-        this.songWriter = sc.nextLine();
+        this.songWriter = InputMethods.getString();
         System.out.println("Nhap trang thai");
-        this.songStatus = Boolean.parseBoolean(sc.nextLine());
+        this.songStatus = Boolean.parseBoolean(InputMethods.getString());
         //hien thi danh sach ca si
         System.out.println("danh sách ca si :");
         for (Singer s:  SingerService.singers){
@@ -116,7 +115,7 @@ public class Song {
         }
         while (true) {
             System.out.println("Nhap id ca si");
-            int id = Integer.parseInt(sc.nextLine());
+            int id = Integer.parseInt(InputMethods.getString());
             Singer singer = SingerService.findById(id);
             if (singer != null) {
                 this.singer = singer;
@@ -130,6 +129,6 @@ public class Song {
     public  void displayData(){
         System.out.println("----------------------------------------------------------------------------------------------------------");
         System.out.printf("ID : %3s | SongName : %15s | Descriptions : %20s | SongWriter : %10s | Status : %5s | SingerName : %15s \n",
-                songId,songName,descriptions.substring(0,15)+"...",songWriter,songStatus?"active":"inActive",singer.getSingerName());
+                songId,songName,descriptions,songWriter,songStatus?"active":"inActive",singer.getSingerName());
     }
 }
