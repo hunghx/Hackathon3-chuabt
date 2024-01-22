@@ -6,7 +6,22 @@ import ra.validate.InputMethods;
 import java.util.Date;
 import java.util.Scanner;
 
-public class SongService {
+public class SongService implements ISongCrud{
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public void edit() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
     public static Song[] songs ;
     static {
         songs = new Song[]{
@@ -16,7 +31,7 @@ public class SongService {
         };
     }
 
-    public static Song findById(String id){
+    public  Song findById(String id){
         for (int i = 0; i < songs.length; i++) {
             if (songs[i].getSongId().equals(id)){
                 return songs[i];

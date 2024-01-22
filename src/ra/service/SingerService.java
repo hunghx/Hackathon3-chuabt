@@ -5,7 +5,27 @@ import ra.validate.InputMethods;
 
 import java.util.Scanner;
 
-public class SingerService {
+public class SingerService implements ISingerCrud{
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public Singer findById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void edit() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
     public static int newId = 4;
     public static Singer[] singers ;
     static {
